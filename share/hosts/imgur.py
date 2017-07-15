@@ -1,12 +1,12 @@
 from collections import namedtuple
 from requests import post, get
 
+SIZE_LIMIT = 10 # MB
 client_id = "9c65f969001905d"
-url = "https://api.imgur.com/3/image"
 
 Album = namedtuple("Album", "id deletehash")
 
-def upload(file_name, file_path, album=None):
+def upload(file_path, album=None):
     """Upload an image to imgur
 
     Args:
@@ -16,6 +16,7 @@ def upload(file_name, file_path, album=None):
     Returns:
         link (str): image link url
     """
+    url = "https://api.imgur.com/3/image"
     file = {"image": open(file_path, "rb")}
     headers = {"authorization": "Client-ID {0}".format(client_id)}
     
@@ -64,16 +65,17 @@ def get_album_link(album):
     return link
 
 
-def upload_multiple(files):
+def upload_multiple(file_paths):
     """Create an album and upload all the images into it.
 
     Args:
-        files ([FileInfo]): the file images to be uploaded.
+        files ([str]): the list of file image paths to be uploaded.
 
     Returns:
-        None
+        url (str): The album url link
     """
     album = create_album()
-    for file in files:
-        upload(file.name, file.path, album=album)
-    print("Album link:", get_album_link(album))
+    for file_path in file_paths:
+        upload(file_path, album=album)
+    return get_album_link(album)
+

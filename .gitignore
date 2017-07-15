@@ -7,3 +7,6 @@ scratch.py
 
 # Sublime text
 *.sublime-*
+
+# pytest
+.cache

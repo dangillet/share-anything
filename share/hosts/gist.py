@@ -1,5 +1,6 @@
 from requests import post
 
+SIZE_LIMIT = 1 # MB
 url = "https://api.github.com/gists"
 
 

@@ -7,7 +7,11 @@ parser = ArgumentParser(
 )
 
 parser.add_argument("file", nargs="*", help="path to the file to upload")
-parser.add_argument("--host", help="explicitly specify the host to use")
+parser.add_argument(
+    "--host", 
+    choices=("imgur", "gist", "anonfile"),
+    help="explicitly specify the host to use")
+
 args = parser.parse_args()
 
 

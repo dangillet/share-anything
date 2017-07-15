@@ -1,7 +1,7 @@
 from requests import post
 
 url = "https://anonfile.com/api/upload"
-
+SIZE_LIMIT = 1024 # MB
 
 def upload(file_name, file_path):
     payload = {
